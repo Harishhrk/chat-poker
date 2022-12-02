@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="index.js"></script>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css'></link>
+    <link href='index.css' rel='stylesheet' type='text/css'></link>
+  </head>
+  <body>
+
+    <form class="username-form">
+      <input id="username-input" placeholder="Username"></input>
+      <button id="create-user-btn">Join Chat</button>
+    </form>
+
+    <div class="main-container">
+      <div class="channels-and-users-online-container">
+        <h1 class="brand">Chat</h1>
+        <div class="channels">
+            <h2 class="channels-label">Room</h2>
+            <div class="new-channel-form"><input id="new-channel-input" placeholder="Enter Room ID" /><button id="new-channel-btn">Create</button></div>
+            <div class="channel-current">General</div>
+        </div>
+        <h2>Online Users</h2>
+        <div class="users-online"></div>
+      </div>
+      <div class="chat-container">
+        <div class="chat-container-fluid">
+          <div class="message-container">
+              <h2>Messages</h2>
+          </div>
+          <div class="text-chat-divide"></div>
+          <div class="chat-box"><textarea id="chat-input" placeholder="Type a message"></textarea><button class="btn" id="send-chat-btn">Send</button></div>
+        </div>
+      </div>
+      <div id="modal">
+        
+        <div class="grid-container">
+            <div><button id="1">1</button></div>
+              
+              <div><button id="2">2</button></div>
+              <div><button id="3">3</button></div>
+              <div><button id="4">4</button></div>
+              <div><button id="5">5</button></div>
+              <div><button id="6">6</button></div>
+              <div><button id="7">7</button></div>
+              <div><button id="8">8</button></div>
+              <div><button id="9">9</button></div>
+              
+            
+              
+            </div>
+            <input type="submit"  id="submit" class="submit" value="Submit" onclick="subFunc()">
+    
+    
+        <div class="grid-container-text">
+            <p>User 1 <b id="value1"></b></p>
+            <p>User 2 <b id="value2"></b></p>
+        </div>
+    </div>
+    </div>
+    
+
+    <script>
+        const btn = document.getElementById("btn");
+        const submit = document.getElementById("submit");
+        var socket = io();
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (input.value) {
+            socket.emit('chat message', input.value);
+            input.value = '';
+          }
+        });
+        socket.on('chat message', function(msg) {
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].addEventListener('click', function user1(bvalue){
+                    document.getElementById("value1").innerHTML = i+1;
+                   
+                });
+            }
+        });
+    </script>
+  </body>
+</html>
